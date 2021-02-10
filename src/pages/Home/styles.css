@@ -1,0 +1,21 @@
+.home-text {
+  padding-top: 117px;
+  padding-left: 120px;
+}
+
+.text-title {
+  margin-top: 0;
+  font-size: 48px;
+  line-height: 64px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  color: #062847;
+}
+
+.text-subtitle {
+  margin-top: 24px;
+  margin-bottom: 48px;
+  font-size: 20px;
+  line-height: 36px;
+  color: #5A6774;
+}

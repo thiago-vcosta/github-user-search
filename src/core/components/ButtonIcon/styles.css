@@ -1,0 +1,23 @@
+.btn-icon {
+  background-color: #1890FF;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 8px 18px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 24px;
+  cursor: pointer;
+
+  /*width: 100px;
+  height: 40px;
+  background: #1890FF;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  color: #FFFFFF;
+  cursor: pointer;*/
+}
