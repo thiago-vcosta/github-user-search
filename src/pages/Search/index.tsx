@@ -1,64 +1,106 @@
 import ButtonIcon from 'core/components/ButtonIcon';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import './styles.css';
 
+type FormState = {
+  company: string;
+  public_repos: string;
+  followers: string; 
+  following: string;
+  blog: string;
+  location: string;
+  created_at: string;
+  avatar_url: string;
+  html_url: string;
+}
+
+const dayjs = require('dayjs');
+
 const Search = () => {
+  const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [userData, setUserData] = useState<FormState>({
+    company: '',
+    public_repos: '',
+    followers: '',
+    following: '',
+    blog: '',
+    location: '',
+    created_at: '',
+    avatar_url: '',
+    html_url: ''
+  });
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsLoading(true);
+    fetch(`https://api.github.com/users/${search}`)
+      .then(response => response.json())
+      .then(userResponse => setUserData(userResponse))
+      .finally(() => setIsLoading(false));
+  }
+
+   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value)
+  }
+
   return (
     <div className="search-container">
-      <div className="search-form">
+      <form onSubmit={handleSubmit}>
+        <div className="search-form">
         <h3 className="search-subtitle">Encontre um perfil Github</h3>
-        <form>
           <input
+            value={search}
             name="usuario"
             type="text"
             className="form-control"
             placeholder="Usuário Github"
+            onChange={handleOnChange}
           />
-        </form>
-        <Link to="/search">
-          <ButtonIcon text="Começar" />
-        </Link>
-      </div>
+          <div className="search-form-button">
+            <ButtonIcon text="Encontrar" />
+          </div>
+        </div>
+      </form>
       <div className="search-result">
         <div className="search-result-row1">
           <div className="search-result-image">
-            <h3>imagem</h3>
+          <img src={userData.avatar_url} alt="alternatetext" className="search-result-image2"/>
+            
           </div>
           <div className="search-result-info">
             <div className="search-result-col2-row1">
               <div className="search-result-field">
-                <p className="search-result-field-text">Repositórios públicos: 62</p>
+                <p className="search-result-field-text">Repositórios públicos: {userData.public_repos}</p>
               </div>
               <div className="search-result-field">
-                <p className="search-result-field-text">Seguidores: 127</p>
+                <p className="search-result-field-text">Seguidores: {userData.followers}</p>
               </div>
               <div className="search-result-field">
-                <p className="search-result-field-text">Seguindo: 416</p>
+                <p className="search-result-field-text">Seguindo: {userData.following}</p>
               </div>
-
             </div>
             <div className="search-result-col2-row2">
               <h3 className="search-result-col2-title">Informações</h3>
               <div className="search-result-field2">
-                <p className="search-result-field2-text">Empresa: @ZupIT</p>
+                <p className="search-result-field2-text">Empresa: {userData.company}</p>
               </div>
               <div className="search-result-field2">
-                <p className="search-result-field2-text">Website/Blog: https://thewashington.dev</p>
+                <p className="search-result-field2-text">Website/Blog: {userData.blog}</p>
               </div>
               <div className="search-result-field2">
-                <p className="search-result-field2-text">Localidade: Uberlândia</p>
+                <p className="search-result-field2-text">Localidade: {userData.location}</p>
               </div>
               <div className="search-result-field2">
-                <p className="search-result-field2-text">Membro desde: 19/10/2013</p>
+                <p className="search-result-field2-text">Membro desde: {(dayjs(`${userData.created_at}`).format("DD/MM/YYYY"))}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="search-result-row2">
-          <Link to="/search">
+          <a href={userData.html_url} target="_blank" rel="noreferrer">
             <ButtonIcon text="Ver perfil" />
-          </Link>
+          </a>
         </div>
         <div></div>
       </div>

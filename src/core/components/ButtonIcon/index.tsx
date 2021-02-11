@@ -7,7 +7,7 @@ type Props = {
 
 const ButtonIcon = ({ text }: Props) => {
   return (
-      <button className="btn-icon">
+      <button type="submit" className="btn-icon">
             {text}
       </button>
   );
