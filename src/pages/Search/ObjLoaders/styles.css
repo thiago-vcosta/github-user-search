@@ -1,0 +1,12 @@
+.loader-content {
+  margin-top: 54px;
+  height: 337px;
+  padding: 3px 23px 27px 11px;
+  background: #F5F5F5;
+  border-radius: 8px;
+  display: flex;
+}
+
+.info-loader {
+  margin-top: 23px;
+}
