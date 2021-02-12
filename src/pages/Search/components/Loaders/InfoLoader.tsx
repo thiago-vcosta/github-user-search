@@ -10,7 +10,7 @@ const InfoLoader = () => (
     backgroundColor="#dedede"
     foregroundColor="#f5f5f5"
   >
-    <rect x="0" y="0" rx="2" ry="2" width="870" height="260" />
+    <rect x="0" y="0" rx="2" ry="2" width="470" height="260" />
   </ContentLoader>
 )
 
