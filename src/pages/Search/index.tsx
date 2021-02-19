@@ -38,8 +38,14 @@ const Search = () => {
       setIsLoading(true);
       setSubmitDone(true);
       fetch(`https://api.github.com/users/${search}`)
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw response
+          }
+          return response.json()
+        })
         .then(userResponse => setUserData(userResponse))
+        .catch(() => alert('Erro ao pesquisar usuário!'))
         .finally(() => setIsLoading(false));
     } else {
       alert('Favor digitar um usuário');
